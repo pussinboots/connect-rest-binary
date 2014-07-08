@@ -34,28 +34,28 @@ rest.get('/content/pdf/:owner/:repo', function (request, content, callback) {
 	console.log( 'Received:' + request.format() + ' ' + JSON.stringify(content) );
 	var repo = request.parameters.owner +"/" + request.parameters.repo
 	var data = fs.createReadStream('test/data/book.pdf');
-	callback(null, data, { headers: { 'Content-Disposition': 'attachment; filename="book.pdf'  } });
+	callback(null, data, { errorCode: 404, headers: { 'Content-Disposition': 'attachment; filename="book.pdf'  } });
 }, { contentType:'application/pdf' } );
 
 rest.get('/content/epub/:owner/:repo', function (request, content, callback) {
 	console.log( 'Received:' + request.format() + ' ' + JSON.stringify(content) );
 	var repo = request.parameters.owner +"/" + request.parameters.repo;
 	var data = fs.createReadStream('/ebooks/book.epub');
-	callback(null, data, { headers: { 'Content-Disposition': 'attachment; filename="book.epub'  } });
+	callback(null, data, { errorCode: 404, headers: { 'Content-Disposition': 'attachment; filename="book.epub'  } });
 }, { contentType:'application/epub'} );
 
 rest.get('/content/mobi/:owner/:repo', function (request, content, callback) {
 	console.log( 'Received:' + request.format() + ' ' + JSON.stringify(content) );
 	var repo = request.parameters.owner +"/" + request.parameters.repo;
 	var data = fs.createReadStream('/ebooks/book.mobi');
-	callback(null, data, { headers: { 'Content-Disposition': 'attachment; filename="book.mobi"'  } });
+	callback(null, data, { errorCode: 404, headers: { 'Content-Disposition': 'attachment; filename="book.mobi"'  } });
 }, { contentType:'application/mobi' } );
 
 rest.get('/content/html/:owner/:repo', function (request, content, callback) {
 	console.log( 'Received:' + request.format() + ' ' + JSON.stringify(content) );
 	var repo = request.parameters.owner +"/" + request.parameters.repo
 	var data = fs.createReadStream('/ebooks/book.html');
-	callback(null, data);
+	callback(null, data, {errorCode: 404});
 }, { contentType:'text/html' } );
 
 server.use(function static(req, res, next) {
